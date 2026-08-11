@@ -85,6 +85,14 @@
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
+
+        // ZMK が ACTIVE の間はセンサーの省電力降格を止め、初動の遅れを無くす。
+        // PMW3610 の降格はセンサー自身の動きだけで決まるため、これが無いと
+        // タイピング中にセンサーが REST3 (500ms サンプリング) まで落ち、
+        // ボールに触れてから反応するまで最大 0.5 秒かかる。
+        // ZMK が IDLE (CONFIG_ZMK_IDLE_TIMEOUT、既定 30 秒) になると
+        // ドライバが自動で解除するので、放置時の消費は従来どおり。
+        force-awake;
     };
 };
 
