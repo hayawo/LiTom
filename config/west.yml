@@ -6,6 +6,8 @@ manifest:
       url-base: https://github.com/badjeff
     - name: pukuhei
       url-base: https://github.com/pukuhei
+    - name: mjmjm0101
+      url-base: https://github.com/mjmjm0101
   projects:
     - name: zmk
       remote: cormoran
@@ -31,6 +33,9 @@ manifest:
       revision: zmk-0.3
     - name: zmk-tom-oled
       remote: pukuhei
+      revision: main
+    - name: zmk-input-processor-scroll-inertia
+      remote: mjmjm0101
       revision: main
   self:
     path: config

@@ -30,6 +30,36 @@
         status = "disabled";
         device = <&trackball>;
     };
+
+    // 慣性スクロール (iOS風): 玉を弾いて離すとスクロールが減衰しながら続く。
+    // https://github.com/mjmjm0101/zmk-input-processor-scroll-inertia
+    //
+    // 慣性中の出力は下流のプロセッサを通らずホストへ直接送られるため、
+    // scale / scale-div には「このノードより後段の合計倍率」を設定する。
+    //   zip_scroll_scaler 3 32  ->  3/32
+    //   scroll_runtime_input_processor (既定 1/60)
+    //   合計 3/(32*60) = 1/640
+    // Studio で scroll のランタイム倍率を変えた場合は scale-div も追従させること。
+    scroll_inertia: scroll_inertia {
+        compatible = "zmk,input-processor-scroll-inertia";
+        #input-processor-cells = <0>;
+
+        // 0 = 縦横フリー(現状のスクロール挙動を維持), 1 = 縦のみ, 2 = 横のみ
+        axis = <0>;
+        layer = <2>;
+
+        scale = <1>;
+        scale-div = <640>;
+
+        // PMW3610 は 600cpi なので、既定値(1000cpi 基準)を約 0.6 倍に下げる。
+        // 慣性が出過ぎるなら上げる / 弾いても効かないなら下げる。
+        start = <25>;
+        move = <50>;
+
+        // 停止しきい値。出力周波数 = stop * scale * 125 / scale-div が
+        // 約 5Hz を下回るとカクつくため、1/640 では 30 前後が下限。
+        stop = <30>;
+    };
 };
 
 &default_transform {
@@ -70,9 +100,13 @@
     status = "okay";
     input-processors = <&mouse_runtime_input_processor>;
 
+    // レイヤー2 (SCROLL) ではトラックボールをスクロールとして扱う。
+    // 慣性プロセッサに十分な分解能を渡すため、縮小はスクロール変換後
+    // (zip_scroll_scaler) にまとめている。
+    // 実効倍率 3/32 * 1/60 = 1/640 (旧 1/16 * 1/60 = 1/960 の 1.5倍)。
     scroll {
         layers = <2>;
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_scaler 1 16>, <&zip_xy_to_scroll_mapper>, <&scroll_runtime_input_processor>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_to_scroll_mapper>, <&scroll_inertia>, <&zip_scroll_scaler 3 32>, <&scroll_runtime_input_processor>;
     };
 };
 
