@@ -22,6 +22,15 @@
             tap-ms = <20>;
         };
 
+        vol_up_down: behavior_sensor_rotate_volume_up_down {
+            compatible = "zmk,behavior-runtime-sensor-rotate";
+            label = "ENCODER_VOL_UP_DOWN";
+            #sensor-binding-cells = <0>;
+            cw-binding = <&kp C_VOLUME_UP>;
+            ccw-binding = <&kp C_VOLUME_DOWN>;
+            tap-ms = <20>;
+        };
+
         tab_slide: behavior_sensor_rotate_tab_slide {
             compatible = "zmk,behavior-runtime-sensor-rotate";
             label = "ENCODER_TAB_SLIDE";
@@ -45,7 +54,7 @@
             >;
 
             sensor-bindings = <
-                &tab_slide
+                &vol_up_down
                 &scroll_up_down
                 &scroll_up_down
             >;
@@ -61,7 +70,7 @@
             >;
 
             sensor-bindings = <
-                &tab_slide
+                &vol_up_down
                 &scroll_up_down
                 &scroll_up_down
             >;
@@ -77,7 +86,7 @@
             >;
 
             sensor-bindings = <
-                &tab_slide
+                &vol_up_down
                 &scroll_up_down
                 &scroll_up_down
             >;
@@ -93,7 +102,7 @@
             >;
 
             sensor-bindings = <
-                &tab_slide
+                &vol_up_down
                 &scroll_up_down
                 &scroll_up_down
             >;
@@ -109,7 +118,7 @@
             >;
 
             sensor-bindings = <
-                &tab_slide
+                &vol_up_down
                 &scroll_up_down
                 &scroll_up_down
             >;
@@ -125,7 +134,7 @@
             >;
 
             sensor-bindings = <
-                &tab_slide
+                &vol_up_down
                 &scroll_up_down
                 &scroll_up_down
             >;
@@ -141,7 +150,7 @@
             >;
 
             sensor-bindings = <
-                &tab_slide
+                &vol_up_down
                 &scroll_up_down
                 &scroll_up_down
             >;
