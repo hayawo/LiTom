@@ -11,6 +11,17 @@
 
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 80
 
+// スクロールのランタイムスケーラ (DYA Studio から実行時に変更できる倍率)。
+// LiTom_R.overlay では慣性プロセッサの「上流」に置いてあるので、ここで大きく
+// 割ると慣性へ渡る値が 0 に潰れて速度計測が壊れる。固定の縮小は慣性の下流の
+// zip_scroll_scaler に任せ、ここは素通し (1:1) を基準にする。
+// 注意: この値は NVS に保存されるため、以前 Studio で設定した値があれば
+// そちらが優先される。書き込み後に一度 Studio で速度を設定し直すこと。
+&scroll_runtime_input_processor {
+    scale-multiplier = <1>;
+    scale-divisor = <1>;
+};
+
 / {
     behaviors {
         scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {

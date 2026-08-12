@@ -123,15 +123,11 @@
     };
 };
 
-// モジュール既定の 1/60 のままだと、慣性プロセッサへ渡る前に値が 0 へ潰れて
-// 速度計測が成立しない。縮小は慣性の下流 (zip_scroll_scaler 1 13) に任せ、
-// ここは素通し (1:1) を基準にして DYA Studio からの倍率調整に使う。
-// 注意: この値は NVS に保存されるため、以前 Studio で設定した値があると
-// そちらが優先される。書き込み後に一度 Studio で速度を設定し直すこと。
-&scroll_runtime_input_processor {
-    scale-multiplier = <1>;
-    scale-divisor = <1>;
-};
+// NOTE: &scroll_runtime_input_processor の倍率既定値 (1:1) は LiTom.keymap 側で
+// 設定している。ラベルを定義する runtime-input-processor.dtsi を include して
+// いるのが keymap で、こちらは overlay より後に処理されるため、overlay では
+// ノード上書き構文が使えない (プロパティ内の <&label> 参照は後段で解決される
+// ので問題ない)。
 
 // 右手OLED用I2C設定
 &pinctrl {
