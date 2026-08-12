@@ -14,6 +14,9 @@
 
     kscan0: kscan0 {
         compatible = "zmk,kscan-gpio-charlieplex";
+        // ディープスリープからの復帰口。これが無いと zmk_pm_suspend_devices() が
+        // kscan も停止させてしまい (割り込み無効化 + ピン切断)、起こす手段が無くなる。
+        wakeup-source;
         interrupt-gpios = <&gpio0 28 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
         gpios
             = <&gpio0 29 GPIO_ACTIVE_HIGH>
@@ -37,6 +40,11 @@
     // 設定値は zen-firmware の input-trackball-pmw3610 スニペットに合わせている。
     // 慣性出力は下流のプロセッサをバイパスしてホストへ直接送られるため、
     // scale / scale-div は下流 &zip_scroll_scaler の引数と一致させること。
+    //
+    // DYA Studio でのスクロール速度調整は &scroll_runtime_input_processor が
+    // 担当する。これは慣性の「上流」に置いてあるので、Studio で倍率を変えると
+    // 慣性が計測する速度自体が変わり、実スクロールと慣性が自動で同じだけ
+    // スケールする。したがってここでは静的スケーラの分だけを見ればよい。
     scroll_inertia: scroll_inertia {
         compatible = "zmk,input-processor-scroll-inertia";
         #input-processor-cells = <0>;
@@ -101,13 +109,28 @@
     input-processors = <&mouse_runtime_input_processor>;
 
     // レイヤー2 (SCROLL) ではトラックボールをスクロールとして扱う。
-    // zen-firmware に合わせた静的チェーン。慣性プロセッサが scale/scale-div で
-    // 下流の縮小率をミラーできるよう、スクロール側にはランタイム
-    // (Studio 可変) のスケーラを入れない。
+    // 並び順が重要:
+    //   1. ランタイムスケーラ (Studio 可変) を慣性の「上流」に置く
+    //      -> Studio で倍率を変えると慣性の計測速度も一緒に変わり、
+    //         実スクロールと慣性が常に一致する
+    //   2. 固定の縮小は慣性の「下流」の zip_scroll_scaler にまとめる
+    //      -> 慣性はこの比率を scale/scale-div でミラーする
+    // ランタイム側を 1:1 にしてあるのは、ここで大きく割ると慣性へ渡る値が
+    // 0 に潰れて速度計測が壊れるため (下の &scroll_runtime_input_processor)。
     scroll {
         layers = <2>;
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_to_scroll_mapper>, <&scroll_inertia>, <&zip_scroll_scaler 1 13>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_to_scroll_mapper>, <&scroll_runtime_input_processor>, <&scroll_inertia>, <&zip_scroll_scaler 1 13>;
     };
+};
+
+// モジュール既定の 1/60 のままだと、慣性プロセッサへ渡る前に値が 0 へ潰れて
+// 速度計測が成立しない。縮小は慣性の下流 (zip_scroll_scaler 1 13) に任せ、
+// ここは素通し (1:1) を基準にして DYA Studio からの倍率調整に使う。
+// 注意: この値は NVS に保存されるため、以前 Studio で設定した値があると
+// そちらが優先される。書き込み後に一度 Studio で速度を設定し直すこと。
+&scroll_runtime_input_processor {
+    scale-multiplier = <1>;
+    scale-divisor = <1>;
 };
 
 // 右手OLED用I2C設定

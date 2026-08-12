@@ -45,6 +45,7 @@
         compatible = "zmk,keymap";
 
         default_layer {
+            display-name = "default_layer";
             bindings = <
 &kp ESCAPE        &kp PRINTSCREEN
 &kp Q             &kp L            &kp U         &kp COMMA   &kp PERIOD     &kp LEFT_ALT          &kp EQUAL      &kp F      &kp W     &kp R      &kp Y  &kp P
@@ -61,6 +62,7 @@
         };
 
         MOUSE {
+            display-name = "MOUSE";
             bindings = <
 &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans
@@ -77,6 +79,7 @@
         };
 
         SCROLL {
+            display-name = "SCROLL";
             bindings = <
 &trans      &trans
 &kp ESCAPE  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
@@ -93,6 +96,7 @@
         };
 
         ARROW {
+            display-name = "ARROW";
             bindings = <
 &trans  &trans
 &trans  &trans  &trans  &trans          &trans  &oled_mode  &oled_mode  &trans  &trans              &kp LC(UP_ARROW)  &trans               &trans
@@ -109,6 +113,7 @@
         };
 
         NUM {
+            display-name = "NUM";
             bindings = <
 &trans    &kp SCROLLLOCK
 &kp N1    &kp NUMBER_2    &kp NUMBER_3  &kp NUMBER_4  &kp N5       &trans  &trans   &kp NUMBER_6  &kp N7          &kp N8           &kp N9                &kp N0
@@ -125,11 +130,12 @@
         };
 
         FUNCTION {
+            display-name = "FUNCTION";
             bindings = <
 &trans        &trans
 &kp F1        &kp F2        &kp F3        &kp F4        &kp F5        &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
 &trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans   &trans   &trans
-&trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans   &trans   &trans
+&out OUT_TOG  &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans   &trans   &trans
 &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &trans  &trans  &trans  &trans  &trans
             >;
 
@@ -140,13 +146,18 @@
             >;
         };
 
+        // 未使用の予備レイヤー。到達するバインドは意図的に置いていない。
+        // 出力先切り替え (&out OUT_TOG) は FUNCTION レイヤーへ移設済み。
+        // レイヤー番号を詰めると CALC が 7 -> 6 にずれ、ZMK Studio が
+        // NVS に保存したレイヤー設定と食い違うため、枠だけ残している。
         BT {
+            display-name = "UNUSED";
             bindings = <
-&trans          &trans
-&kp LG(Q)       &kp LC(W)  &out OUT_USB  &out OUT_BLE  &out OUT_TOG  &trans  &trans  &bt BT_PRV  &bt BT_NXT  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
-&kp LG(LS(Z))   &trans     &kp LC(C)     &trans        &trans        &trans  &trans  &trans      &trans      &trans        &trans        &trans
-&kp LG(Z)       &kp LG(X)  &kp LG(C)     &kp LG(V)     &trans        &trans  &trans  &trans      &trans      &trans        &trans        &trans
-&studio_unlock  &trans     &trans        &trans        &trans        &trans  &trans  &trans      &trans      &trans
+&trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
             >;
 
             sensor-bindings = <
@@ -157,6 +168,7 @@
         };
 
         CALC {
+            display-name = "CALC";
             bindings = <
 &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp ASTRK  &kp KP_N7  &kp KP_N8  &kp KP_N9  &kp PLUS

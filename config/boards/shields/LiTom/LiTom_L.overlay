@@ -11,6 +11,9 @@
 
     kscan0: kscan0 {
         compatible = "zmk,kscan-gpio-charlieplex";
+        // ディープスリープからの復帰口。これが無いと zmk_pm_suspend_devices() が
+        // kscan も停止させてしまい (割り込み無効化 + ピン切断)、起こす手段が無くなる。
+        wakeup-source;
         interrupt-gpios = <&gpio0 28 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
         gpios
             = <&gpio0 29 GPIO_ACTIVE_HIGH>

@@ -33,23 +33,3 @@ source "${ZEPHYR_BASE}/subsys/logging/Kconfig.template.log_config"
 
 endif
 
-menuconfig LITOM_IQS7222D_TEST
-    bool "IQS7222D touchpad test input driver"
-    depends on I2C && GPIO && INPUT
-    depends on DT_HAS_AZOTEQ_IQS7222D_TEST_ENABLED
-    help
-      Enable a lightweight IQS7222D test driver for bring-up. It verifies I2C
-      communication, logs product/status data, and emits horizontal relative
-      input from the reported trackpad X coordinate when configured.
-
-if LITOM_IQS7222D_TEST
-
-config LITOM_IQS7222D_TEST_INIT_PRIORITY
-    int "IQS7222D test driver init priority"
-    default INPUT_INIT_PRIORITY
-
-module = LITOM_IQS7222D_TEST
-module-str = litom_iqs7222d_test
-source "${ZEPHYR_BASE}/subsys/logging/Kconfig.template.log_config"
-
-endif
