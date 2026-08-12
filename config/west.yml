@@ -8,6 +8,8 @@ manifest:
       url-base: https://github.com/pukuhei
     - name: mjmjm0101
       url-base: https://github.com/mjmjm0101
+    - name: hayawo
+      url-base: https://github.com/hayawo
   projects:
     - name: zmk
       remote: cormoran
@@ -22,9 +24,14 @@ manifest:
     - name: zmk-module-settings-rpc
       remote: cormoran
       revision: zmk-v0.3.0.0
+    # cormoran/zmk-module-runtime-input-processor の zmk-v0.3.0.0 に、
+    # scale_val() の int16 オーバーフロー修正だけを載せたフォーク。
+    # 本家は掛け算の結果を int16_t で受けているため、Studio で 1.00x 以外の
+    # 倍率にすると速い動きでカーソル / スクロールが逆方向へ飛ぶ。
+    # 本家が修正されたら remote: cormoran に戻すこと。
     - name: zmk-module-runtime-input-processor
-      remote: cormoran
-      revision: zmk-v0.3.0.0
+      remote: hayawo
+      revision: fix/scale-val-int16-overflow
     - name: zmk-behavior-runtime-sensor-rotate
       remote: cormoran
       revision: zmk-v0.3.0.0
