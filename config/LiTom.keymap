@@ -17,6 +17,7 @@
 // zip_scroll_scaler に任せ、ここは素通し (1:1) を基準にする。
 // 注意: この値は NVS に保存されるため、以前 Studio で設定した値があれば
 // そちらが優先される。書き込み後に一度 Studio で速度を設定し直すこと。
+
 &scroll_runtime_input_processor {
     scale-multiplier = <1>;
     scale-divisor = <1>;
@@ -59,10 +60,10 @@
             display-name = "default_layer";
             bindings = <
 &kp ESCAPE        &kp PRINTSCREEN
-&kp Q             &kp L            &kp U         &kp COMMA   &kp PERIOD     &kp LEFT_ALT          &kp EQUAL      &kp F      &kp W     &kp R      &kp Y  &kp P
-&kp E             &kp I            &kp A         &kp O       &kp MINUS      &kp NON_US_BACKSLASH  &kp SLASH      &kp K      &lt 2 T   &kp N      &kp S  &lt 1 H
-&kp Z             &kp X            &kp C         &kp V       &kp SEMICOLON  &kp SQT               &kp GRAVE      &kp G      &kp D     &kp M      &kp J  &lt 3 B
-&kp LEFT_CONTROL  &kp LEFT_WIN     &lt 7 C_MENU  &kp LSHIFT  &kp SPACE      &lt 4 TAB             &kp BACKSPACE  &kp ENTER  &kp HOME  &lt 5 END
+&kp Q             &kp L            &kp U         &kp COMMA   &kp PERIOD     &kp LEFT_ALT  &kp EQUAL      &kp F      &kp W     &kp R      &kp Y  &kp P
+&kp E             &kp I            &kp A         &kp O       &kp MINUS      &kp GRAVE     &kp SLASH      &kp K      &lt 2 T   &kp N      &kp S  &lt 1 H
+&kp Z             &kp X            &kp C         &kp V       &kp SEMICOLON  &kp SQT       &kp BACKSLASH  &kp G      &kp D     &kp M      &kp J  &lt 3 B
+&kp LEFT_CONTROL  &kp LEFT_WIN     &lt 7 C_MENU  &kp LSHIFT  &kp SPACE      &lt 4 TAB     &kp BACKSPACE  &kp ENTER  &kp HOME  &lt 5 END
             >;
 
             sensor-bindings = <
@@ -161,6 +162,7 @@
         // 出力先切り替え (&out OUT_TOG) は FUNCTION レイヤーへ移設済み。
         // レイヤー番号を詰めると CALC が 7 -> 6 にずれ、ZMK Studio が
         // NVS に保存したレイヤー設定と食い違うため、枠だけ残している。
+
         BT {
             display-name = "UNUSED";
             bindings = <
