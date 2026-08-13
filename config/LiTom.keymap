@@ -60,8 +60,8 @@
             display-name = "default_layer";
             bindings = <
 &kp ESCAPE        &kp PRINTSCREEN
-&kp Q             &kp L            &kp U         &kp COMMA   &kp PERIOD     &kp LEFT_ALT  &kp EQUAL      &kp F      &kp W     &kp R      &kp Y  &kp P
-&kp E             &kp I            &kp A         &kp O       &kp MINUS      &kp GRAVE     &kp SLASH      &kp K      &lt 2 T   &kp N      &kp S  &lt 1 H
+&kp Q             &kp L            &kp U         &kp COMMA   &kp PERIOD     &kp LEFT_ALT  &kp GRAVE      &kp F      &kp W     &kp R      &kp Y  &kp P
+&kp E             &kp I            &kp A         &kp O       &kp MINUS      &kp SLASH     &kp EQUAL      &kp K      &lt 2 T   &kp N      &kp S  &lt 1 H
 &kp Z             &kp X            &kp C         &kp V       &kp SEMICOLON  &kp SQT       &kp BACKSLASH  &kp G      &kp D     &kp M      &kp J  &lt 3 B
 &kp LEFT_CONTROL  &kp LEFT_WIN     &lt 7 C_MENU  &kp LSHIFT  &kp SPACE      &lt 4 TAB     &kp BACKSPACE  &kp ENTER  &kp HOME  &lt 5 END
             >;
@@ -128,10 +128,10 @@
             display-name = "NUM";
             bindings = <
 &trans    &kp SCROLLLOCK
-&kp N1    &kp NUMBER_2    &kp NUMBER_3  &kp NUMBER_4  &kp N5       &trans  &trans   &kp NUMBER_6  &kp N7          &kp N8           &kp N9                &kp N0
-&kp EXCL  &kp AT_SIGN     &kp HASH      &kp DOLLAR    &kp PERCENT  &trans  &trans   &kp CARET     &kp AMPERSAND   &kp ASTERISK     &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS
-&trans    &trans          &trans        &trans        &trans       &trans  &trans   &kp TILDE     &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp LEFT_BRACKET      &kp RIGHT_BRACKET
-&trans    &trans          &trans        &trans        &trans       &trans  &kp DEL  &kp ENTER     &trans          &trans
+&kp N1    &kp NUMBER_2    &kp NUMBER_3  &kp NUMBER_4  &kp N5       &trans        &trans   &kp NUMBER_6  &kp N7          &kp N8           &kp N9                &kp N0
+&kp EXCL  &kp AT_SIGN     &kp HASH      &kp DOLLAR    &kp PERCENT  &kp QUESTION  &trans   &kp CARET     &kp AMPERSAND   &kp ASTERISK     &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS
+&trans    &trans          &trans        &trans        &trans       &trans        &trans   &kp TILDE     &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp LEFT_BRACKET      &kp RIGHT_BRACKET
+&trans    &trans          &trans        &trans        &trans       &trans        &kp DEL  &kp ENTER     &trans          &trans
             >;
 
             sensor-bindings = <
