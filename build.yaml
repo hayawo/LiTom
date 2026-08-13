@@ -23,5 +23,30 @@ include:
     snippet: studio-rpc-usb-uart
   - board: xiao_ble
     shield: LiTom_L tom_oled tom_oled_180
+  # NVS を消すには保存先そのものを有効化する必要がある。ZMK 側の
+  # settings_reset.conf は CONFIG_SETTINGS と ZMK_SETTINGS_RESET_ON_START しか
+  # 立てないため、これが無いと「設定リセット」を焼いても何も消えない。
+  # settings_reset は ZMK 本体のシールドで、こちらから <shield>.conf を
+  # 置けないので cmake-args で渡す。
   - board: xiao_ble
     shield: settings_reset
+    cmake-args: >-
+      -DCONFIG_MPU_ALLOW_FLASH_WRITE=y -DCONFIG_NVS=y -DCONFIG_SETTINGS_NVS=y
+      -DCONFIG_FLASH=y -DCONFIG_FLASH_PAGE_LAYOUT=y -DCONFIG_FLASH_MAP=y
+
+  # --- ここから下はデバッグ用。不具合を追うときにコメントを外す ---
+  # USB シリアルにログを出す。書き込み後 COM ポートに繋いで読む。
+  # 右手側は OLED のブランクも止めて、アイドル中の挙動を見えるようにする。
+  # - board: xiao_ble
+  #   shield: LiTom_R tom_oled
+  #   snippet: studio-rpc-usb-uart
+  #   cmake-args: >-
+  #     -DCONFIG_ZMK_USB_LOGGING=y -DCONFIG_ZMK_LOG_LEVEL_DBG=y
+  #     -DCONFIG_LOG_BUFFER_SIZE=8192 -DCONFIG_ZMK_DISPLAY_BLANK_ON_IDLE=n
+  #   artifact-name: LiTom_R_debug
+  # - board: xiao_ble
+  #   shield: LiTom_L tom_oled tom_oled_180
+  #   cmake-args: >-
+  #     -DCONFIG_ZMK_USB_LOGGING=y -DCONFIG_ZMK_LOG_LEVEL_DBG=y
+  #     -DCONFIG_LOG_BUFFER_SIZE=8192
+  #   artifact-name: LiTom_L_debug
