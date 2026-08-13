@@ -1194,9 +1194,9 @@ svg.physical-layout { font-family: ui-monospace, SFMono-Regular, Consolas, monos
 <text class="tap" x="42" y="36">BT_SEL 4</text>
 <text class="hold" x="42" y="53">BT</text>
 </g>
-<g class="key keypos-43 transparent" transform="translate(450 400) rotate(0 -420 -336)">
+<g class="key keypos-43 " transform="translate(450 400) rotate(0 -420 -336)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
-<text class="tap" x="42" y="42">TRANS</text>
+<text class="tap" x="42" y="42">CAPSLOCK</text>
 </g>
 <g class="key keypos-44 transparent" transform="translate(618 400) rotate(0 -588 -336)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
