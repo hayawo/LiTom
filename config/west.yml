@@ -38,12 +38,14 @@ manifest:
     - name: zmk-pmw3610-driver
       remote: badjeff
       revision: zmk-0.3
-    # 本家が 2026-08-13 に ZMK v0.4 へ移行し、LVGL v9 の型 (lv_draw_buf_t) を
-    # 使い始めたため main では v0.3 (LVGL v8) の本リポジトリでビルドできない。
-    # v0.3 対応の最終コミットに固定する。ZMK を v0.4 へ上げる際は main に戻す。
+    # 本家 pukuhei/zmk-tom-oled は 2026-08-13 に ZMK v0.4 へ移行し、LVGL v9 の
+    # 型 (lv_draw_buf_t) を使い始めたため main では v0.3 (LVGL v8) の本リポジトリ
+    # でビルドできない。v0.3 対応の最終コミット bbfe719 を基点にしたフォークで、
+    # HID インジケータの有効化と peripheral のバッテリー表示を追加している。
+    # ZMK を v0.4 へ上げる際は、本家の v0.4 版へこの差分を載せ直すこと。
     - name: zmk-tom-oled
-      remote: pukuhei
-      revision: bbfe71944182539551326a2a76aa02505f3e9e98
+      remote: hayawo
+      revision: fix/hid-indicators-and-peripheral-battery
     # 可動ブランチを指すと本家の更新で不意にビルドが壊れるため SHA で固定する。
     - name: zmk-input-processor-scroll-inertia
       remote: mjmjm0101
