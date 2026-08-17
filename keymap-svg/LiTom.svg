@@ -1125,9 +1125,9 @@ svg.physical-layout { font-family: ui-monospace, SFMono-Regular, Consolas, monos
 <text class="tap" x="42" y="36">OUT_TOG</text>
 <text class="hold" x="42" y="53">out</text>
 </g>
-<g class="key keypos-27 transparent" transform="translate(114 316) rotate(0 -84 -252)">
+<g class="key keypos-27 " transform="translate(114 316) rotate(0 -84 -252)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
-<text class="tap" x="42" y="42">TRANS</text>
+<text class="tap" x="42" y="42">oled_power</text>
 </g>
 <g class="key keypos-28 transparent" transform="translate(198 316) rotate(0 -168 -252)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
