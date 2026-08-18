@@ -59,11 +59,11 @@
         default_layer {
             display-name = "default_layer";
             bindings = <
-&kp ESCAPE        &kp PRINTSCREEN
-&kp Q             &kp L            &kp U         &kp COMMA   &kp PERIOD     &kp LEFT_ALT  &kp GRAVE      &kp F      &kp W     &kp R      &kp Y  &kp P
-&kp E             &kp I            &kp A         &kp O       &kp MINUS      &kp SLASH     &kp EQUAL      &kp K      &lt 2 T   &kp N      &kp S  &lt 1 H
-&kp Z             &kp X            &kp C         &kp V       &kp SEMICOLON  &kp SQT       &kp BACKSLASH  &kp G      &kp D     &kp M      &kp J  &lt 3 B
-&kp LEFT_CONTROL  &kp LEFT_WIN     &lt 7 C_MENU  &kp LSHIFT  &kp SPACE      &lt 4 TAB     &kp BACKSPACE  &kp ENTER  &kp HOME  &lt 5 END
+&kp ESCAPE   &kp PRINTSCREEN
+&kp Q        &kp L            &kp U         &kp COMMA         &kp PERIOD     &kp TAB         &kp K_CMENU    &kp F      &kp W     &kp R      &kp Y  &kp P
+&kp E        &kp I            &kp A         &kp O             &kp MINUS      &kp SLASH       &kp EQUAL      &kp K      &lt 2 T   &kp N      &kp S  &lt 1 H
+&kp Z        &kp X            &kp C         &kp V             &kp SEMICOLON  &kp SQT         &kp BACKSLASH  &kp G      &kp D     &kp M      &kp J  &lt 3 B
+&lt 4 GRAVE  &kp LEFT_WIN     &kp LEFT_ALT  &kp LEFT_CONTROL  &kp SPACE      &kp LEFT_SHIFT  &kp BACKSPACE  &kp ENTER  &kp HOME  &lt 5 END
             >;
 
             sensor-bindings = <
@@ -145,9 +145,9 @@
             display-name = "FUNCTION";
             bindings = <
 &trans        &trans
-&kp F1        &kp F2        &kp F3        &kp F4        &kp F5        &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
-&trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans   &trans   &trans
-&out OUT_TOG  &oled_power   &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans   &trans   &trans
+&kp F1        &kp F2        &kp F3        &kp F4        &kp F5        &kp F6        &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
+&trans        &trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans   &trans   &trans
+&out OUT_TOG  &oled_power   &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans   &trans   &trans
 &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &kp CAPSLOCK  &trans  &trans  &trans  &trans
             >;
 
