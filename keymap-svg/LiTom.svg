@@ -829,27 +829,27 @@ svg.physical-layout { font-family: ui-monospace, SFMono-Regular, Consolas, monos
 </g>
 <g class="key keypos-2 " transform="translate(30 148) rotate(0 0 -84)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
-<text class="tap" x="42" y="42">1</text>
+<text class="tap" x="42" y="42">TAB</text>
 </g>
 <g class="key keypos-3 " transform="translate(114 148) rotate(0 -84 -84)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
-<text class="tap" x="42" y="42">NUMBER_2</text>
+<text class="tap" x="42" y="42">NUMBER_1</text>
 </g>
 <g class="key keypos-4 " transform="translate(198 148) rotate(0 -168 -84)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
-<text class="tap" x="42" y="42">NUMBER_3</text>
+<text class="tap" x="42" y="42">NUMBER_2</text>
 </g>
 <g class="key keypos-5 " transform="translate(282 148) rotate(0 -252 -84)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
-<text class="tap" x="42" y="42">NUMBER_4</text>
+<text class="tap" x="42" y="42">NUMBER_3</text>
 </g>
 <g class="key keypos-6 " transform="translate(366 148) rotate(0 -336 -84)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
-<text class="tap" x="42" y="42">5</text>
+<text class="tap" x="42" y="42">NUMBER_4</text>
 </g>
-<g class="key keypos-7 transparent" transform="translate(450 148) rotate(0 -420 -84)">
+<g class="key keypos-7 " transform="translate(450 148) rotate(0 -420 -84)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
-<text class="tap" x="42" y="42">TRANS</text>
+<text class="tap" x="42" y="42">5</text>
 </g>
 <g class="key keypos-8 transparent" transform="translate(618 148) rotate(0 -588 -84)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
