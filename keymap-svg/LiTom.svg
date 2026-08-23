@@ -59,7 +59,7 @@ svg.physical-layout { font-family: ui-monospace, SFMono-Regular, Consolas, monos
 </g>
 <g class="key keypos-8 " transform="translate(618 148) rotate(0 -588 -84)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
-<text class="tap" x="42" y="42">K_CMENU</text>
+<text class="tap" x="42" y="42">NON_US_BACKSLASH</text>
 </g>
 <g class="key keypos-9 " transform="translate(702 148) rotate(0 -672 -84)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
@@ -157,7 +157,7 @@ svg.physical-layout { font-family: ui-monospace, SFMono-Regular, Consolas, monos
 </g>
 <g class="key keypos-32 " transform="translate(618 316) rotate(0 -588 -252)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
-<text class="tap" x="42" y="42">BACKSLASH</text>
+<text class="tap" x="42" y="42">&#x27;</text>
 </g>
 <g class="key keypos-33 " transform="translate(702 316) rotate(0 -672 -252)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
@@ -202,8 +202,7 @@ svg.physical-layout { font-family: ui-monospace, SFMono-Regular, Consolas, monos
 </g>
 <g class="key keypos-43 " transform="translate(450 400) rotate(0 -420 -336)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
-<text class="tap" x="42" y="36">&#x27;</text>
-<text class="hold" x="42" y="53">LT 4</text>
+<text class="tap" x="42" y="42">MO 4</text>
 </g>
 <g class="key keypos-44 " transform="translate(618 400) rotate(0 -588 -336)">
 <rect x="0" y="0" width="84" height="84" rx="6" ry="6"/>
