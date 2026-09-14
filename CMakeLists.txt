@@ -2,3 +2,4 @@ zephyr_library()
 
 zephyr_library_sources_ifdef(CONFIG_LITOM_PREFER_USB_ENDPOINT_ON_READY src/prefer_usb_endpoint.c)
 zephyr_library_sources_ifdef(CONFIG_LITOM_AUTO_MOUSE_LAYER src/auto_mouse_layer.c)
+zephyr_library_sources_ifdef(CONFIG_LITOM_BLE_CONN_PARAM_REFRESH src/ble_conn_param_refresh.c)
