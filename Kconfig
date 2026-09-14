@@ -6,6 +6,16 @@ config LITOM_PREFER_USB_ENDPOINT_ON_READY
       endpoint becomes ready. This keeps BLE enabled for split transport while
       making host input prefer USB when a cable is connected.
 
+config LITOM_BLE_CONN_PARAM_REFRESH
+    bool "Re-request preferred BLE connection parameters when the host slows the link"
+    depends on ZMK_BLE && (!ZMK_SPLIT || ZMK_SPLIT_ROLE_CENTRAL)
+    help
+      Zephyr requests the preferred connection parameters only once after
+      connecting. If the host later lengthens the connection interval (for
+      example while the display is off), pointer reports back up in the BLE
+      HID queue. Request the preferred parameters again when ZMK becomes
+      active and when the host switches to a slower interval.
+
 config LITOM_AUTO_MOUSE_LAYER
     bool "LiTom trackball auto mouse layer"
     depends on INPUT
