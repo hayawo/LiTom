@@ -38,21 +38,27 @@ include:
   # USB シリアルにログを出す。書き込み後 COM ポートに繋いで読む。
   # 右手側は OLED のブランクも止めて、アイドル中の挙動を見えるようにする。
   #
-  # BLE リンク調査用。5 秒ごとに接続間隔と入力件数がログに出る
-  # (CONFIG_LITOM_BLE_LINK_DEBUG)。マウスレポートがキューからあふれると
-  # ZMK 本体が "Consumer message queue full" を WRN で出す (文言は
-  # キーボードの消費者キー用の流用だが、マウスの経路でも同じものが出る)。
-  # USB を挿しても出力先を BLE のままにするため、USB 優先は切ってある。
-  # ログが多すぎるときは LOG_LEVEL_DBG ではなく INF のままにすること。
-  - board: xiao_ble
-    shield: LiTom_R tom_oled
-    snippet: studio-rpc-usb-uart
-    cmake-args: >-
-      -DCONFIG_ZMK_USB_LOGGING=y -DCONFIG_ZMK_LOG_LEVEL_INF=y
-      -DCONFIG_LOG_BUFFER_SIZE=8192 -DCONFIG_LITOM_BLE_LINK_DEBUG=y
-      -DCONFIG_LITOM_PREFER_USB_ENDPOINT_ON_READY=n
-      -DCONFIG_ZMK_DISPLAY_BLANK_ON_IDLE=n
-    artifact-name: LiTom_R_debug
+  # !!! 注意 !!!
+  # 下のデバッグ構成は実機で固まった。キーを押しっぱなしの状態でトラボも
+  # キー入力も一切効かなくなり、電源の入れ直しと再書き込みが必要になった。
+  # 原因は次の 2 つと見ている。
+  #   1. ログレベルの指定 (-DCONFIG_ZMK_LOG_LEVEL_INF=y) が効かず DBG の
+  #      ままだった (CI の .config で CONFIG_ZMK_LOG_LEVEL=4)。入力の
+  #      たびに大量のログが出る。
+  #   2. studio-rpc-usb-uart スニペットと USB ログで CDC を 2 本出すと、
+  #      ログ用のポートが Windows から「機能していません」と見える。
+  #      読み出されないまま出力が詰まり、そこで処理が止まる。
+  # 再挑戦するならスニペットを外して CDC を 1 本にし、ログレベルを
+  # 確実に INF へ落とすこと (choice なので -D では効かない。デバッグ用の
+  # .conf を別に用意して指定する)。
+  # - board: xiao_ble
+  #   shield: LiTom_R tom_oled
+  #   cmake-args: >-
+  #     -DCONFIG_ZMK_USB_LOGGING=y
+  #     -DCONFIG_LOG_BUFFER_SIZE=8192 -DCONFIG_LITOM_BLE_LINK_DEBUG=y
+  #     -DCONFIG_LITOM_PREFER_USB_ENDPOINT_ON_READY=n
+  #     -DCONFIG_ZMK_DISPLAY_BLANK_ON_IDLE=n
+  #   artifact-name: LiTom_R_debug
   # - board: xiao_ble
   #   shield: LiTom_L tom_oled tom_oled_180
   #   cmake-args: >-
