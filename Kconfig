@@ -16,6 +16,15 @@ config LITOM_BLE_CONN_PARAM_REFRESH
       HID queue. Request the preferred parameters again when ZMK becomes
       active and when the host switches to a slower interval.
 
+config LITOM_BLE_LINK_DEBUG
+    bool "Log BLE link parameters and input event counts every 5 seconds"
+    depends on ZMK_BLE && INPUT
+    help
+      Diagnostic only. Logs the connection interval the host actually uses
+      and how many input events the keyboard produced, so they can be
+      compared against what the host receives. Enable it in the debug build
+      together with CONFIG_ZMK_USB_LOGGING.
+
 config LITOM_AUTO_MOUSE_LAYER
     bool "LiTom trackball auto mouse layer"
     depends on INPUT
