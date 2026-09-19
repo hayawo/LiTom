@@ -1,0 +1,54 @@
+description: |
+  Input processor that drops physically impossible pointer deltas.
+
+  The PMW3610 occasionally returns garbage motion right after the sensor
+  wakes from its rest modes: a burst of values close to the 12 bit range
+  (+-2047) with randomly alternating signs. On the host this throws the
+  cursor across the screen.
+
+  Measured on LiTom (600 cpi, one report per 16ms): normal motion is 20-80
+  counts per report and a fast flick peaks around 200. A recorded burst
+  after 3 minutes of no trackball use contained 11 reports within 165ms
+  with values up to 1575.
+
+  Any event above max-delta is zeroed, and every tracked event within
+  suppress-ms after it is zeroed as well, so the remainder of a burst is
+  swallowed too. Place it first in the input-processors chain, before any
+  scaling, so the thresholds refer to raw sensor counts.
+
+compatible: "litom,input-processor-spike-filter"
+
+properties:
+  "#input-processor-cells":
+    type: int
+    required: true
+    const: 0
+
+  track-remainders:
+    type: boolean
+    description: Unused; declared so the listener macros can read it.
+
+  type:
+    type: int
+    default: 2 # INPUT_EV_REL
+    description: Input event type to filter.
+
+  codes:
+    type: array
+    required: true
+    description: Event codes to filter (typically INPUT_REL_X and INPUT_REL_Y).
+
+  max-delta:
+    type: int
+    default: 600
+    description: |
+      Absolute value above which an event is treated as a spike. Keep it
+      well above the fastest real flick so normal use is never clipped.
+
+  suppress-ms:
+    type: int
+    default: 250
+    description: |
+      After a spike, zero every tracked event for this long. Bursts arrive
+      as several reports, and the later ones can be small enough to pass
+      the max-delta check on their own.

@@ -16,6 +16,17 @@ config LITOM_BLE_CONN_PARAM_REFRESH
       HID queue. Request the preferred parameters again when ZMK becomes
       active and when the host switches to a slower interval.
 
+config LITOM_INPUT_PROCESSOR_SPIKE_FILTER
+    bool "Drop physically impossible pointer deltas"
+    default y
+    depends on DT_HAS_LITOM_INPUT_PROCESSOR_SPIKE_FILTER_ENABLED
+    help
+      The PMW3610 can return garbage motion right after waking from its
+      rest modes: a burst of values near the 12 bit range with randomly
+      alternating signs, which throws the cursor across the screen. Zero
+      out events above the configured threshold, plus everything within a
+      short window after one, so the rest of the burst is swallowed too.
+
 config LITOM_BLE_LINK_DEBUG
     bool "Log BLE link parameters and input event counts every 5 seconds"
     depends on ZMK_BLE && INPUT

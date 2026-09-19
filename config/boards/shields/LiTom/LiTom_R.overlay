@@ -34,6 +34,21 @@
         device = <&trackball>;
     };
 
+    // センサーが省電力から復帰した直後に、壊れた移動量が届くことがある。
+    // 実測 (PC 側で HID レポートを 1 件ずつ記録): 3 分 20 秒ぶりに触った
+    // 瞬間から 165ms の間に 11 件、符号がばらばらで最大 1575 という値が
+    // 届き、カーソルが画面端まで飛んだ。通常の移動は 20〜80、速く弾いても
+    // 200 程度なので、桁が違う。
+    // スケーリングより前 (生のカウントのまま) に置くこと。
+    spike_filter: spike_filter {
+        compatible = "litom,input-processor-spike-filter";
+        #input-processor-cells = <0>;
+        type = <INPUT_EV_REL>;
+        codes = <INPUT_REL_X INPUT_REL_Y>;
+        max-delta = <600>;
+        suppress-ms = <250>;
+    };
+
     // 慣性スクロール (iOS風): 玉を弾いて離すとスクロールが減衰しながら続く。
     // https://github.com/mjmjm0101/zmk-input-processor-scroll-inertia
     //
@@ -149,7 +164,8 @@
 
 &trackball_listener {
     status = "okay";
-    input-processors = <&mouse_runtime_input_processor>;
+    // &spike_filter は必ず先頭 (生のセンサー値のまま判定するため)。
+    input-processors = <&spike_filter>, <&mouse_runtime_input_processor>;
 
     // レイヤー2 (SCROLL) ではトラックボールをスクロールとして扱う。
     // 並び順が重要:
@@ -162,7 +178,7 @@
     // 0 に潰れて速度計測が壊れるため (下の &scroll_runtime_input_processor)。
     scroll {
         layers = <2>;
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_to_scroll_mapper>, <&scroll_runtime_input_processor>, <&scroll_inertia>, <&zip_scroll_scaler 1 13>;
+        input-processors = <&spike_filter>, <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_to_scroll_mapper>, <&scroll_runtime_input_processor>, <&scroll_inertia>, <&zip_scroll_scaler 1 13>;
     };
 };
 
